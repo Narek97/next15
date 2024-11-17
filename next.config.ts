@@ -45,6 +45,42 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/:locale/:path*/',
+        destination: '/:locale/:path*/login',
+        permanent: false,
+        has: [
+          {
+            type: 'query',
+            key: 'locale',
+            value: '(en|de|fr)',
+          },
+        ],
+      },
+      {
+        source: '/:path*/',
+        destination: '/en/:path*/login',
+        permanent: false,
+      },
+      {
+        source: '/authorization/callback',
+        has: [
+          {
+            type: 'query',
+            key: 'code',
+          },
+          {
+            type: 'query',
+            key: 'state',
+          },
+        ],
+        destination: '/api/auth/callback/mywebpage',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

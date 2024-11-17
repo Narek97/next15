@@ -7,7 +7,6 @@ import { useSession } from 'next-auth/react';
 const Page = () => {
   const t = useTranslations('HomePage');
   const { data: session, status } = useSession();
-  console.log(session, 'session');
   return (
     <div>
       <h1>{t('title')}</h1>
